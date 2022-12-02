@@ -1,0 +1,34 @@
+.Navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 5px;
+  background-color: #06173d;
+  color: #ddddf7;
+  cursor: pointer;
+
+  .user {
+    gap: 5px;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      
+    }
+
+    button{
+        background-color: #184AB9;
+        border-radius: 4px;
+        padding: 5px 10px;
+        border: 0;
+        cursor: pointer;
+        font-size: 12px;
+        color: #ddddf7;
+    }
+  }
+}

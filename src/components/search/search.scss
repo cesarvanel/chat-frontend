@@ -1,0 +1,21 @@
+.Search {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid gray;
+  .search__form {
+    padding: 10px;
+
+    input{
+      background-color: transparent;
+      color: white;
+      border: none;
+      width: 100%;
+      height: 20px;
+      outline: none;
+      caret-color: #184AB9;
+      font-size: 14px;
+      font-style: italic;
+    }
+
+  }
+}

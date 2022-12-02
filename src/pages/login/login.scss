@@ -1,0 +1,67 @@
+.Login {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    background: linear-gradient(0deg, #041232 -0.08%, #194DC0 100.01%); 
+  
+    .formWrapper {
+      background-color: white;
+      padding: 20px 60px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      text-align: center;
+      gap: 10px;
+  
+      .logo {
+        color: #184ab9;
+        font-size: 32px;
+        font-weight: 700;
+      }
+  
+      .title {
+        font-weight: 400;
+        color: #184ab9;
+        font-size: 16px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+  
+        input {
+          padding: 10px;
+          border: none;
+          border-bottom: 1px solid #184ab9;
+          width: 250px;
+  
+          &::placeholder {
+            color: #8a8c90;
+          }
+
+          &:focus {
+            outline: #184ab9 solid 2px;
+            border-radius: 2px;
+            border-bottom: none;
+          }
+        }
+  
+        button {
+          padding: 15px;
+          background-color: #184ab9;
+          color: white;
+          border-radius: 6px;
+          border: none;
+          cursor: pointer;
+        }
+
+        p {
+          color: #184ab9;
+          font-size: 14px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  
