@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 import "./login.scss";
 
-const Login = ({}) => {
+const Login = () => {
   return (
     <div className="Login">
       <div className="formWrapper">
         <h2 className="logo">Ronddo Chat</h2>
-        <h4 className="title">Register</h4>
+        <h4 className="title">Login</h4>
         <form>
           <input type="email" name="" id="" placeholder="email" />
           <input type="password" name="" id="" placeholder="password" />

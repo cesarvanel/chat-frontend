@@ -5,9 +5,9 @@ import "./chatList.scss";
 const ChatList = () => {
   return (
     <div className="ChatList">
-      {[1, 2, 3, 4,5].map((data: any) => {
+      {[1, 2, 3, 4,5].map((data: any, index:number) => {
         return (
-          <div className="userChat">
+          <div className="userChat" key={index}>
             <img src="/images/cesar.jpg" alt="" />
             <div className="userChatInfo">
               <span>Cesar</span>

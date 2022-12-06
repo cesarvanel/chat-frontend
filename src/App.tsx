@@ -8,6 +8,7 @@ import Login from './pages/login/login';
 
 function App() {
   return (
+    
     <BrowserRouter>
     <Routes>
       <Route path='/'>

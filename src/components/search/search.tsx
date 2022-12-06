@@ -1,5 +1,4 @@
 import React from "react";
-import { MagnifyingGlass } from "phosphor-react";
 
 import "./search.scss";
 
