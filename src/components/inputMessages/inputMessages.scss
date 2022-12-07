@@ -1,44 +1,76 @@
 .InputMessages {
-  height: 50px;
+  height: 60px;
   background-color: white;
   padding: 10px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
-  input {
-    width: 100%;
-    border: none;
-    outline: none;
-    font-size: 18px;
-    color: #010816;
-    height: 100%;
-    border-radius: 12px;
+  .emoji {
+    position: relative;
+    svg {
+      color: #010816;
+      cursor: pointer;
+      font-size: 18px;
+      margin-right: 10px;
+    }
+
+    .emoji-picker-react{
+
+      position: absolute;
+      top:-35px
+    }
   }
 
-  .send {
+  form {
     display: flex;
     align-items: center;
+    width: 100%;
+    height: 100%;
     gap: 10px;
+    input {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      color: #e2e2e2;
+      height: 100%;
+      border-radius: 12px;
+      background-color: #010816;
+      padding-left: 10px;
 
-    button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 32px;
-      width: 32px;
-      border-radius: 50%;
-      border: 0;
-      cursor: pointer;
-      background-color: transparent;
+      &::selection{
 
-      &:hover {
-        background-color: #e2e2e2;
+        background-color: white;
       }
 
-      svg {
-        width: 24px;
-        height: 24px;
+      
+    }
+
+    .send {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+        border: 0;
+        cursor: pointer;
+        background-color: transparent;
+
+        &:hover {
+          background-color: #e2e2e2;
+        }
+
+        svg {
+          width: 24px;
+          height: 24px;
+        }
       }
     }
   }

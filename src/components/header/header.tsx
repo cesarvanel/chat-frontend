@@ -3,11 +3,13 @@ import React from "react";
 
 import "./header.scss";
 
-const Header = () => {
+const Header = (props:any) => {
+  const { currentChat } = props;
   return (
     <div className="Header">
-      <div>
-        <h3>Cesar</h3>
+      <div className="title">
+        <img src={currentChat.userAvatar} alt="" />
+        <h3>{currentChat.userEmail}</h3>
       </div>
 
       <div className="right">

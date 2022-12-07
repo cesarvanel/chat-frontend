@@ -1,4 +1,5 @@
 export interface User extends Document {
+  [x: string]: any;
   userName: string;
   userEmail: string;
   userPwd: string;
@@ -10,14 +11,19 @@ export interface User extends Document {
 }
 
 export type chatState = {
-
-  contact: [],
-  message:[],
-  room:[]
-
-}
+  contact: [];
+  message: [];
+  room: [];
+};
 
 export type userState = {
+  sesUser: any,
+  contact: User[];
+  loading: boolean;
+  error:any
+};
 
-  sesUser:{}
-}
+export type ReduxAction = {
+  payload: any;
+  type: any;
+};

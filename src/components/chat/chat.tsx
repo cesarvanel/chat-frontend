@@ -1,17 +1,26 @@
-import React from "react"
-import Header from "../header/header"; 
+import React from "react";
+import Header from "../header/header";
 import MessageList from "../messageList/messageList";
 import InputMessages from "../inputMessages/inputMessages";
-import "./chat.scss"
+import "./chat.scss";
 
-const Chat = () => {
+const Chat = (props: any) => {
+  const { currentChat } = props;
 
-	return <div className="Chat">
-		<Header/>
-		<MessageList/>
-		<InputMessages/>
-		
-	</div>
-}
 
-export default Chat
+  const handleSendMsg = async (msg:any) =>{
+
+	alert(msg)
+
+  }
+
+  return (
+    <div className="Chat">
+      <Header currentChat={currentChat} />
+      <MessageList />
+      <InputMessages handleSendMsg  = {handleSendMsg}  />
+    </div>
+  );
+};
+
+export default Chat;

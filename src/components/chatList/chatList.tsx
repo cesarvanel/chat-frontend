@@ -1,26 +1,69 @@
-import React from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import "./chatList.scss";
 
-const ChatList = () => {
+import { User } from "../../types/types";
+
+export type TchatProps = {
+  contacts: User[];
+  loading: boolean;
+  currentUser: any;
+  changeChat: (chat: any) => void;
+};
+
+const ChatList = (props: TchatProps) => {
+  const { contacts, currentUser, loading, changeChat } = props;
+
+  const [currentName, setCurrentName] = useState("");
+  const [currentImage, setCurrentImage] = useState("");
+  const [currentSelected, setCurrentSelected] = useState(undefined);
+
+  useEffect(() => {
+    if (currentUser) {
+      setCurrentImage(currentUser.userAvatar);
+      setCurrentName(currentUser.userName);
+    }
+  }, [currentUser]);
+
+  const changeCurrentChat = (index: any, contacts: User) => {
+    setCurrentSelected(index);
+    changeChat(contacts);
+  };
+
   return (
-    <div className="ChatList">
-      {[1, 2, 3, 4,5].map((data: any, index:number) => {
-        return (
-          <div className="userChat" key={index}>
-            <img src="/images/cesar.jpg" alt="" />
-            <div className="userChatInfo">
-              <span>Cesar</span>
-              <p>hello vanel </p>
+    <Fragment>
+      {currentImage && currentName && (
+        <div className="ChatLists">
+          {loading && (
+            <div className="ChatList">
+              {contacts.map((contact: User, index: number) => {
+                return (
+                  <div
+                    className={`userChat ${
+                      index === currentSelected ? "selecred" : ""
+                    }`}
+                    key={index}
+                    onClick={() => changeCurrentChat(index, contact)}
+                  >
+                    <img src={contact.userAvatar} alt="" />
+                    <div className="userChatInfo">
+                      <span>{contact.userName}</span>
+                      <p>hello vanel </p>
+                    </div>
+                    <div className="Time">
+                      <div>10:30</div>
+                      <div className="badge"></div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <div className="Time">
-              <div >10:30</div>
-              <div className="badge">1</div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
+          )}
+
+          <div>{}</div>
+        </div>
+      )}
+    </Fragment>
   );
 };
 

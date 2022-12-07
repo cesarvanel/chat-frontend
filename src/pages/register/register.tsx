@@ -1,42 +1,65 @@
-import React, { useRef,useState } from "react";
+import React, {useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { REGISTER } from "../../types/constans/constant";
+import { useNavigate } from "react-router-dom";
+import { ToastProps } from "../../components/Notifications/Toast";
+import Toast from "../../components/Notifications/Toast";
+import { key_App } from "../../types/constans/constant";
 
 import "./register.scss";
 
 const Register = () => {
+  const random = Math.round(Math.random() * 1000);
+  const navigate = useNavigate();
+  const toastRef = useRef(null);
   const [user, setUser] = useState({
     userName: "",
     userEmail: "",
     userPwd: "",
     confPwd: "",
+    userAvatar: `https://api.multiavatar.com/${random}`,
   });
 
-  console.log(user);
+  const [toast, setToast] = useState<ToastProps>({ message: "", type: "" });
 
-  console.log("REGISTER", REGISTER);
+  const handleValidation = async () => {
+    const { userName, userEmail, userPwd, confPwd } = user;
+
+    if (
+      !userName.trim() ||
+      !userEmail.trim() ||
+      !userPwd.trim() ||
+      !confPwd.trim()
+    ) {
+      setToast({
+        ...toast,
+        message: "veuillez remplir tous les champs",
+        type: "Error",
+      });
+    } else if (userPwd.trim() !== confPwd.trim()) {
+      setToast({
+        ...toast,
+        message: "confirmation du mot de passe  incorrecte",
+        type: "Error",
+      });
+    } else {
+      try {
+        const { data } = await axios.post(REGISTER, user);
+        console.log(data);
+        if (data.success) {
+          localStorage.setItem(key_App, JSON.stringify(data.sesUser));
+          navigate("/");
+        }
+      } catch (error: any) {
+        console.log(error.response);
+      }
+    }
+  };
 
   const handleSubmmit = async (e: any) => {
     e.preventDefault();
-
-    let response;
-    try {
-      response = await axios.post(
-        "http://localhost:4500/api/users/register",{user}
-        
-      );
-      console.log(response);
-    } catch (error: any) {
-      console.log(error);
-    }
-
-    /*const response = await fetch(REGISTER, {
-      method: "POST",
-      mode:'cors',
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(user),
-    });*/
+    handleValidation();
   };
 
   const imageRef = useRef(null);
@@ -63,15 +86,19 @@ const Register = () => {
           />
           <input
             type="password"
-            placeholder="Confirm Password"
+            placeholder="Password"
             onChange={(e) => setUser({ ...user, confPwd: e.target.value })}
           />
+
           <input type="file" hidden id="file" ref={imageRef} />
           <label htmlFor="file">
             <img src="images/add-user.png" alt="" />
             <span>Add and Avatar</span>
           </label>
           <button>Sing up</button>
+          {toast && (
+            <Toast message={toast.message} type={toast.type} ref={toastRef} />
+          )}
         </form>
         <p>
           {" "}

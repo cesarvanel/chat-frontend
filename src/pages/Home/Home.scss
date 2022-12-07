@@ -31,5 +31,13 @@
     display: flex;
     box-shadow: 1px 2px 6px white;
     overflow: hidden;
+
+    .Sidebar {
+      flex: 1;
+      height: 100%;
+      flex-direction: column;
+      border-right: 1px solid #06173d;
+      background: #010816;
+    }
   }
 }

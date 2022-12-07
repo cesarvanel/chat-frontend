@@ -1,4 +1,6 @@
 .ChatList {
+  height: 350px;
+  overflow-y: scroll;
   .userChat {
     display: flex;
     padding: 10px;
