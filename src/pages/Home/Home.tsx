@@ -69,7 +69,7 @@ const Home = () => {
         {currentChat === undefined ? (
           <Welcome currentUser={currentUser} />
         ) : (
-          <Chat currentChat={currentChat} />
+          <Chat currentChat={currentChat} currentUser={currentUser} />
         )}
       </div>
     </div>

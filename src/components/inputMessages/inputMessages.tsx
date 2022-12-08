@@ -23,7 +23,7 @@ const InputMessages = (props: InputProps) => {
   const sendChat = (e:any) =>{
     e.preventDefault()
 
-    if(msg.length < 0){
+    if(msg.length > 0){
       handleSendMsg(msg)
       setMsg('')
 
@@ -42,7 +42,7 @@ const InputMessages = (props: InputProps) => {
         {showEmojisPicker && <Picker onEmojiClick={handleEmojisClick} />}
       </div>
 
-      <form onSubmit={(e) => sendChat(e)}>
+      <form onSubmit={sendChat}>
         <input
           type="text"
           placeholder="Enter your messages here"

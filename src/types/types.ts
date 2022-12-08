@@ -27,3 +27,11 @@ export type ReduxAction = {
   payload: any;
   type: any;
 };
+
+
+
+export type chatMessage ={
+  message: Object;
+  users: User[];
+  sender: Object;
+}
