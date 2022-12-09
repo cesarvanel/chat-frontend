@@ -3,7 +3,6 @@ import Navbar from "../../components/navbar/navbar";
 import Search from "../../components/search/search";
 import ChatList from "../../components/chatList/chatList";
 import { useNavigate } from "react-router-dom";
-import userSlice from "../../redux/apps/reducer";
 import {
   useAppDispatch,
   useAppSelector,
@@ -12,7 +11,6 @@ import {
 } from "../../redux/store";
 import { getAllUser } from "../../redux/apps/actions";
 import { key_App } from "../../types/constans/constant";
-import { User } from "../../types/types";
 import Chat from "../../components/chat/chat";
 import Welcome from "../../components/welcome/welcome";
 

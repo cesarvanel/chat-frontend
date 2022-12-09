@@ -1,14 +1,16 @@
-import { createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { getAllUser } from "./actions";
 
 import { ReduxAction, userState } from "../../types/types";
-import { User } from "../../types/types";
+import { getMessage } from "./actions";
 
 export const userSate: userState = {
-  sesUser: {},
+  sesUser: { data: {}, loading: false },
   contact: [],
+  message: [],
   loading: false,
-  error:""
+  loadMsg: false,
+  error: "",
 };
 
 const userSlice = createSlice({
@@ -23,22 +25,40 @@ const userSlice = createSlice({
     LOGIN: (state, action: ReduxAction) => {
       state.sesUser = action.payload;
     },
+
+    LoadSesUser: (state, action: ReduxAction) => {
+      state.sesUser.data = action.payload;
+      state.sesUser.loading = true;
+    },
+
+    AddNewMessage:(state, action) =>{
+      state.message = action.payload
+    }
   },
 
-  extraReducers:(builder) =>{
-    builder.addCase(getAllUser.fulfilled,(state, action) =>{
-      state.contact = action.payload.allUser
-      state.loading = true
-    } )
+  extraReducers: (builder) => {
+    builder.addCase(getAllUser.fulfilled, (state, action) => {
+      state.contact = action.payload.allUser;
+      state.loading = true;
+    });
 
-    builder.addCase(getAllUser.pending, (state) =>{
-      state.loading = false
-    })
+    builder.addCase(getAllUser.pending, (state) => {
+      state.loading = false;
+    });
 
-    builder.addCase(getAllUser.rejected, (state, action) =>{
-      state.error = action.meta.rejectedWithValue
-    })
-  }
+    builder.addCase(getAllUser.rejected, (state, action) => {
+      state.error = action.meta.rejectedWithValue;
+    });
+
+    builder.addCase(getMessage.fulfilled, (state, action) => {
+      state.message = action.payload.data;
+      state.loadMsg = true;
+    });
+
+    builder.addCase(getMessage.rejected, (state) => {
+      state.loadMsg = false;
+    });
+  },
 });
 
 export default userSlice;

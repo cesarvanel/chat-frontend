@@ -6,7 +6,8 @@ export const REGISTER = USERS + '/register';
 export const LOGIN = USERS + '/login';
 export const GET_ALL_USERS = USERS + '/all_users';
 export const GET_ALL_MESSAGE = MESSAGE + '/getMessage'
-export const NEW_MESSAGE = MESSAGE + '/addMessage'
+export const NEW_MESSAGE = MESSAGE + '/addMessage';
+export const  SOCKET_CONNECT = 'http://localhost:4500/'
 
 export const key_App = 'chat-app'
 

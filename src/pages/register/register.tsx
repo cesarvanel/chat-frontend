@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { ToastProps } from "../../components/Notifications/Toast";
 import Toast from "../../components/Notifications/Toast";
 import { key_App } from "../../types/constans/constant";
+import userSlice from "../../redux/apps/reducer";
+import { useAppDispatch } from "../../redux/store";
 
 import "./register.scss";
 
@@ -13,6 +15,7 @@ const Register = () => {
   const random = Math.round(Math.random() * 1000);
   const navigate = useNavigate();
   const toastRef = useRef(null);
+  const dispatch = useAppDispatch()
   const [user, setUser] = useState({
     userName: "",
     userEmail: "",
@@ -49,6 +52,7 @@ const Register = () => {
         console.log(data);
         if (data.success) {
           localStorage.setItem(key_App, JSON.stringify(data.sesUser));
+          dispatch(userSlice.actions.LoadSesUser(data.sesUser))
           navigate("/");
         }
       } catch (error: any) {

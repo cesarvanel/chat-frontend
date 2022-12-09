@@ -18,8 +18,10 @@ export type chatState = {
 
 export type userState = {
   sesUser: any,
-  contact: User[];
+  contact: User[],
+  message: any,
   loading: boolean;
+  loadMsg:boolean,
   error:any
 };
 

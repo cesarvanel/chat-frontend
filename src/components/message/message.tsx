@@ -2,11 +2,17 @@ import React from "react";
 
 import "./message.scss";
 
-const Message = () => {
+const Message = (props:any) => {
+
+  const {msgs} = props;
+
+  console.log('msgs', msgs)
+
+  
   return (
     <div className="Message owner">
       <div className="sender">
-        <span>Que faites vous dans le vie ?</span>
+        <span>{msgs.message}</span>
       </div>
 
       <div className="receiver">
