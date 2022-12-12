@@ -5,12 +5,22 @@ import "./chat.scss";
 import axios from "axios";
 import { NEW_MESSAGE } from "../../types/constans/constant";
 import userSlice from "../../redux/apps/reducer";
-import { useAppDispatch } from "../../redux/store";
+import {
+  messageSelector,
+  useAppDispatch,
+  useAppSelector,
+} from "../../redux/store";
+import { EVENTS } from "../../redux/socket/actionsTypes";
+import { getMessage } from "../../redux/apps/actions";
+import { useEffect, useState } from "react";
 
 const Chat = (props: any) => {
-  const { currentChat, currentUser } = props;
-  const dispatch = useAppDispatch()
+  const { currentChat, currentUser, socket } = props;
+  const [arrival, setArrival] = useState<any>(null);
 
+  const dispatch = useAppDispatch();
+
+  const messages = useAppSelector(messageSelector);
   const handleSendMsg = async (msg: any) => {
     try {
       const post: any = {
@@ -20,12 +30,26 @@ const Chat = (props: any) => {
         receiver: currentChat.userEmail,
       };
       const { data } = await axios.post(NEW_MESSAGE, post);
-      //dispatch(userSlice.actions.AddNewMessage())
+      socket.emit(EVENTS.SEND_MESSAGE, {
+        receiver: currentChat.userEmail,
+        sender: currentUser.userEmail,
+        msg: msg,
+      });
+      const values = { fromMe: true, message: data.Msg.message.text };
+      const msgs = [...messages, values];
+      dispatch(userSlice.actions.AddNewMessage(msgs));
     } catch (error: any) {
       console.log(error);
     }
   };
 
+  useEffect(() => {
+    if (socket) {
+      socket.on(EVENTS.RECEIVE_MESSAGE, (msg: any) => {
+        setArrival({ fromMe: false, message: msg });
+      });
+    }
+  }, [socket]);
 
   return (
     <div className="Chat">

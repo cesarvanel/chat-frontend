@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Navbar from "../../components/navbar/navbar";
 import Search from "../../components/search/search";
 import ChatList from "../../components/chatList/chatList";
@@ -10,17 +10,25 @@ import {
   loadingSelector,
 } from "../../redux/store";
 import { getAllUser } from "../../redux/apps/actions";
-import { key_App } from "../../types/constans/constant";
+import { key_App, SOCKET_CONNECT } from "../../types/constans/constant";
 import Chat from "../../components/chat/chat";
 import Welcome from "../../components/welcome/welcome";
 
 import "./Home.scss";
+import { EVENTS } from "../../redux/socket/actionsTypes";
+import { useSocket } from "../../hooks/useSocket";
 
 const Home = () => {
   const navigate = useNavigate();
 
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState<any>({});
   const [currentChat, setCurrentChat] = useState(undefined);
+  const socket = useSocket(SOCKET_CONNECT, {
+    autoConnect: false,
+    auth: { token: currentUser.accessToken },
+    reconnectionAttempts: 5,
+    reconnectionDelay: 5,
+  });
 
   const dispatch = useAppDispatch();
 
@@ -43,6 +51,14 @@ const Home = () => {
       setCurrentUser(JSON.parse(items));
     }
   }, [navigate]);
+
+  useEffect(() => {
+    socket.on(EVENTS.connection, () => {
+      console.log(socket.id);
+
+      socket.emit(EVENTS.ADD_USER, currentUser.userEmail);
+    });
+  }, [currentUser.userEmail, socket]);
 
   const handleChangeChat = (chat: any) => {
     setCurrentChat(chat);
@@ -67,7 +83,11 @@ const Home = () => {
         {currentChat === undefined ? (
           <Welcome currentUser={currentUser} />
         ) : (
-          <Chat currentChat={currentChat} currentUser={currentUser} />
+          <Chat
+            currentChat={currentChat}
+            currentUser={currentUser}
+            socket={socket}
+          />
         )}
       </div>
     </div>

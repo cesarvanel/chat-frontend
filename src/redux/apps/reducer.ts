@@ -33,7 +33,8 @@ const userSlice = createSlice({
 
     AddNewMessage:(state, action) =>{
       state.message = action.payload
-    }
+    },
+
   },
 
   extraReducers: (builder) => {

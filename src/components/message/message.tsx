@@ -2,22 +2,18 @@ import React from "react";
 
 import "./message.scss";
 
-const Message = (props:any) => {
+const Message = (props: any) => {
+  const { msgs } = props;
 
-  const {msgs} = props;
-
-  console.log('msgs', msgs)
-
-  
   return (
     <div className="Message owner">
-      <div className="sender">
-        <span>{msgs.message}</span>
-      </div>
+      <div className="sender">{msgs.fromMe && <span>{msgs.message}</span>}</div>
 
       <div className="receiver">
         <img src="/images/cesar.jpg" alt="" />
-        <p>j'apprend le developpement je suis un violent developpeur</p>
+        {msgs.fromMe && (
+          <p>j'apprend le developpement je suis un violent developpeur</p>
+        )}
       </div>
     </div>
   );

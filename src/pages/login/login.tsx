@@ -13,13 +13,13 @@ const Login = () => {
   const inputPasswordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  /*useEffect(() => {
-    const items = localStorage.getItem(key_App);
+  useEffect(() => {
+    const items: string | null = localStorage.getItem(key_App);
     if (items) {
       navigate("/");
     }
 
-  }, [navigate]);*/
+  }, [navigate]);
 
 
   const handleValidation = async (userEmail?: string, userPwd?: string) => {
@@ -29,10 +29,6 @@ const Login = () => {
       try {
         const { data } = await axios.post(LOGIN, { userEmail, userPwd });
         if (data.success) {
-          const user = data.sesUser._doc;
-          const token = data.accessToekn;
-          const sesUser = { ...user, token };
-          localStorage.setItem(key_App, JSON.stringify(sesUser));
           navigate("/");
         }
       } catch (error: any) {

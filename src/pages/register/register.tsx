@@ -1,4 +1,4 @@
-import React, {useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { REGISTER } from "../../types/constans/constant";
@@ -15,7 +15,7 @@ const Register = () => {
   const random = Math.round(Math.random() * 1000);
   const navigate = useNavigate();
   const toastRef = useRef(null);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const [user, setUser] = useState({
     userName: "",
     userEmail: "",
@@ -52,7 +52,7 @@ const Register = () => {
         console.log(data);
         if (data.success) {
           localStorage.setItem(key_App, JSON.stringify(data.sesUser));
-          dispatch(userSlice.actions.LoadSesUser(data.sesUser))
+          dispatch(userSlice.actions.LoadSesUser(data.sesUser));
           navigate("/");
         }
       } catch (error: any) {

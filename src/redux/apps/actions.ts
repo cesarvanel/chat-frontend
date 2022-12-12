@@ -6,6 +6,7 @@ export const getAllUser = createAsyncThunk("getallUser", async () => {
   try {
     const { data } = await axios.get(GET_ALL_USERS);
     return data;
+
   } catch (error) {
     console.log(error);
   }
@@ -23,6 +24,7 @@ export const getMessage = createAsyncThunk<any, MessageParam>(
       const { data } = await axios.get(
         `${GET_ALL_MESSAGE}?sender=${params.sender}&receiver=${params.receiver}`
       );
+
 
       return data;
     } catch (error) {
